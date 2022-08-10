@@ -1,0 +1,292 @@
+{
+  "id": "test",
+  "name": "Test Ethics Application Form",
+  "description": "This form provides a short form for testing",
+  "version": "1.0",
+  "components": [
+    {
+      "type": "section",
+      "title": "Applicant Details",
+      "components": [
+        {
+          "type": "text-question",
+          "title": "Principal Investigator (supervisor)",
+          "name": "principal_investigator_name",
+          "singleLine": true,
+          "questionType": "text",
+          "_comment": "A Text Question represents a standard HTML input/textarea. It is a textarea if singleLine is false. True is default"
+        },
+        {
+          "type": "text-question",
+          "title": "Principal Investigator E-mail",
+          "name": "principal_investigator_email",
+          "questionType": "email",
+          "requestInput": true
+        },
+        {
+          "type": "checkbox-question",
+          "title": "Supervisor Review Agreement",
+          "name": "supervisor_review_confirmation",
+          "options": [
+            {"label": "I, the supervisor, confirm that I have reviewed this application and agree to its submission for review", "value": "Agreed"}
+          ],
+          "requestInput": true
+        },
+        {
+          "type": "text-question",
+          "title": "Student Name",
+          "name": "student_name",
+          "questionType": "text",
+          "autofill": "user.name",
+          "_comment": "Make this field editable if changes need to be made and autofill with the user's name if the user object exists on the front-end with a name attribute"
+        },
+        {
+          "type": "text-question",
+          "title": "ID Number",
+          "name": "student_id",
+          "questionType": "text"
+        },
+        {
+          "type": "text-question",
+          "title": "E-mail Address",
+          "name": "email_address",
+          "questionType": "email",
+          "autofill": "user.account.email",
+          "_comment": "Make this field not editable and autofill with the user's account email if the user account object exists on the front-end with a name attribute"
+        },
+        {
+          "type": "text-question",
+          "title": "Programme of Study",
+          "name": "study_programme",
+          "questionType": "text"
+        },
+        {
+          "type": "select-question",
+          "title": "FYP, MSc or PhD Dissertation",
+          "name": "research_type",
+          "multiple": false,
+          "options": [
+            "FYP",
+            "MSc",
+            "PhD"
+          ]
+        },
+        {
+          "type": "text-question",
+          "title": "Working Title of Study",
+          "name": "study_title",
+          "questionType": "text"
+        },
+        {
+          "type": "text-question",
+          "title": "Start date of which approval is sought",
+          "description": "This field is populated when the application is approved",
+          "name": "approval_start_date",
+          "questionType": "date",
+          "editable": false,
+          "autofill": "application.approvalTime",
+          "_comment": "Make this field not editable and it will be filled by the front-end with the application object if it exists and the time it was approved if that field exists"
+        },
+        {
+          "type": "text-question",
+          "title": "End date of which approval is sought",
+          "name": "approval_end_date",
+          "questionType": "date"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Testing Section",
+      "components": [
+        {
+          "type": "multipart-question",
+          "conditional": true,
+          "parts": {
+            "1": {
+              "question": {
+                "type": "radio-question",
+                "name": "participants_recording",
+                "title": "Will the participants be recorded?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "inline": false,
+                "_comment": "inline can be set to true to render the radios/checkboxes as a horizontal row"
+              },
+              "branches": [
+                {
+                  "part": "2",
+                  "value": "Yes"
+                },
+                {
+                  "part": "4",
+                  "value": "Yes"
+                }
+              ]
+            },
+            "2": {
+              "question": {
+                "type": "checkbox-question",
+                "title": "Which of the following will the recordings be (can be both)?",
+                "name": "recording_type",
+                "options": [
+                  "Video",
+                  "Audio"
+                ]
+              },
+              "branches": [
+                {
+                  "part": "3",
+                  "value": "Video"
+                }
+              ]
+            },
+            "3": {
+              "question": {
+                "type": "text-question",
+                "title": "Please state what will be recorded - participant's face, or just hands/gestures",
+                "name": "what_will_be_recorded"
+              },
+              "branches": []
+            },
+            "4": {
+              "question": {
+                "type": "text-question",
+                "title": "Why is the recording required?",
+                "name": "why_recording_required",
+                "description": "Recording must be destroyed after transcription, please state this",
+                "singleLine": false
+              },
+              "branches": []
+            }
+          }
+        },
+        {
+          "type": "question-table",
+          "cells": {
+            "columns": {
+              "Name": {
+                "type": "text-question",
+                "name": "other_investigator_name",
+                "required": false
+              },
+              "Qualifications & Affiliation": {
+                "type": "text-question",
+                "name": "other_investigator_qualifications",
+                "required": false
+              },
+              "Signature": {
+                "type": "signature",
+                "name": "other_investigator_signature",
+                "label": null,
+                "required": false
+              }
+            }
+          },
+          "numRows": 2,
+          "_comment": "The name of each component will be suffixed with _n, where n is the row number. This element allows a table of columns being the name of the input and rows of cells where the cells are duplicated inputs to answer the columns"
+        },
+        {
+          "type": "checkbox-group",
+          "title": "Please indicate the terms that apply to this research project",
+          "multiple": true,
+          "defaultBranch": null,
+          "required": true,
+          "checkboxes": [
+            {
+              "title": "Healthy Adults"
+            },
+            {
+              "title": "Healthy Children (< 18 yrs)"
+            },
+            {
+              "title": "Patient Adults"
+            },
+            {
+              "title": "Patient Children (< 18 yrs)"
+            },
+            {
+              "title": "'Potentially Vulnerable' Adults"
+            },
+            {
+              "title": "'Potentially Vulnerable' Children"
+            },
+            {
+              "title": "Physical Activity"
+            },
+            {
+              "title": "Questionnaire/Interview"
+            },
+            {
+              "title": "Medical Devices/Drugs"
+            },
+            {
+              "title": "Video Recording/Photography"
+            },
+            {
+              "title": "Food/Drink Supplementation"
+            },
+            {
+              "title": "Collection of Personal Details"
+            },
+            {
+              "title": "Measure Physical In Nature"
+            },
+            {
+              "title": "Measure Psychological In Nature"
+            },
+            {
+              "title": "Body Tissue Samples"
+            },
+            {
+              "title": "Observational"
+            },
+            {
+              "title": "Body Fluids Samples (e.g. blood)"
+            },
+            {
+              "title": "Record Based"
+            }
+          ]
+        },
+        {
+          "type": "multipart-question",
+          "title": "How many participants will be recruited?",
+          "conditional": false,
+          "parts": {
+            "1": {
+              "question": {
+                "type": "text-question",
+                "title": "Male",
+                "name": "male_participants",
+                "questionType": "number"
+              },
+              "branches": []
+            },
+            "2": {
+              "question": {
+                "type": "text-question",
+                "title": "Female",
+                "name": "female_participants",
+                "questionType": "number"
+              },
+              "branches": []
+            },
+            "3": {
+              "question": {
+                "type": "text-question",
+                "title": "Provide further information if necessary",
+                "name": "participants_recruitment_information",
+                "singleLine": false,
+                "required": false
+              },
+              "branches": []
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

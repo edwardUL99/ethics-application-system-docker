@@ -1,0 +1,37 @@
+<nav [ngClass]="sticky ? 'navbar navbar-expand-lg navbar-light bg-light sticky-top':'navbar navbar-expand-lg navbar-light bg-light'">
+  <div class="container-fluid">
+    <div class="navbar-brand">
+      <img src="/assets/images/ul-logo.jpg" style="height:50px;">
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="!hideLinks" class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/applications">Applications</a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="/user-search">User Search</a>
+        </li>
+        <li *ngIf="canExport" class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="/export">Export Applications</a>
+        </li>
+      </ul>
+      <div *ngIf="displayProfile" class="dropdown nav-item" style="margin-right: 1%">
+        <a class="link-normal-text dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{name}}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/profile"><b>Profile</b></a></li>
+          <li><a class="dropdown-item" routerLink="/answer-requests" 
+            [appTooltip]="'If a user has requested you give input on their application, the requests will go here'" [tooltipPosition]="'bottom'">Answer Requests</a></li>
+          <li><a class="dropdown-item" routerLink="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

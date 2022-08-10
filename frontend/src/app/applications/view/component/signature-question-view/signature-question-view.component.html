@@ -1,0 +1,23 @@
+<div [ngClass]="visible ? 'question-spacing':''" [id]="questionComponent?.componentId" [formGroup]="form" (window:resize)="sizeChange()" *ngIf="display()" [style.width.px]="definedWidth" class="mx-auto">
+    <app-request-component-answer [component]="this" [context]="context"></app-request-component-answer>
+    <app-refer-marker [viewingUser]="context?.viewingUser" [application]="application" [component]="this" [enable]="visible"></app-refer-marker>
+    <app-required-indicator [component]="this"></app-required-indicator>
+    <div *ngIf="edit()">
+        <label>{{questionComponent?.title}}</label>
+        <div class="form-text render-new-lines">{{questionComponent?.description}}</div>
+        <div #signatureContainer>
+            <label>{{questionComponent?.label}}</label>
+            <div class="text-end w-100">
+                <button class="btn btn-sm btn-outline-primary" style="margin-right: 1%" type="button" (click)="paste()" [disabled]="disabled">Paste</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" (click)="copy()" [disabled]="disabled">Copy</button>
+            </div>
+            <signature-field #signature (widthChanges)="defineWidth($event)" [formControlName]="questionComponent?.name" [inputDisabled]="disabled" (drawStarted)="drawStarted()" (signatureEntered)="signatureEntered($event)"></signature-field>
+            <div class="text-end">
+                <button type="button" class="btn btn-link" (click)="clear()" [disabled]="disabled">Clear</button>
+            </div>
+            <app-field-error [condition]="control?.errors?.['required'] && control?.touched" [error]="'This field is required'"></app-field-error>
+        </div>
+    </div>
+    <app-answer-view [question]="this" [answer]="application?.answers?.[questionComponent?.componentId]"></app-answer-view>
+    <app-comments-display [application]="application" [component]="this" [viewingUser]="context?.viewingUser" [enable]="visible"></app-comments-display>
+</div>
