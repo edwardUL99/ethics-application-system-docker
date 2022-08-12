@@ -1,8 +1,0 @@
-backup-dir: 'backups'
-database:
-  provider: 'psql' | 'mysql'
-  database: '<database-name>'
-  user: '<username>'
-  password: '<password>'
-files:
-  upload-dir: '/tmp/uploads'

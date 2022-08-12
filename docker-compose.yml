@@ -10,7 +10,6 @@ services:
     environment:
       ETHICS_FRONTEND_URL: "http://localhost"
       DATABASE_URL: "jdbc:postgresql://database:5432/ethics"
-      ETHICS_ANTIVIRUS_HOST: "clamav"
     ports:
       - 8081:8080
   frontend:
@@ -30,7 +29,7 @@ services:
       - 5432:5432
     environment:
       POSTGRES_USER: "ethicsuser"
-      POSTGRES_PASSWORD: "ADD-PASS-HERE"
+      POSTGRES_PASSWORD: "ADD_DB_PASS_HERE"
       POSTGRES_DB: "ethics"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]

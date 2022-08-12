@@ -1,6 +1,0 @@
-<div>
-  <div *ngIf="!hidden" [ngClass]="(dismissible ? 'alert alert-dismissible fade show ':'alert fade show ') + alertType" role="alert">
-    {{message}}
-    <button *ngIf="dismissible" type="button" class="btn-close" aria-label="Close" (click)="hide()"></button>
-  </div>
-</div>
